@@ -1,0 +1,3 @@
+cloud.mondomaine.fr {
+  reverse_proxy nextcloud:80
+}
