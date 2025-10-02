@@ -27,7 +27,9 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       OVERWRITEPROTOCOL: https
       OVERWRITEHOST: nextcloudsama.devpapangue.com
-      TRUSTED_PROXIES: caddy
+      TRUSTED_PROXIES: ${TRUSTED_PROXIES}
+      NEXTCLOUD_CONFIG_MAINTENANCE_START_HOUR: 2
+      DEFAULT_PHONE_REGION: FR
 
   caddy:
     image: caddy:2
