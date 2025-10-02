@@ -5,6 +5,7 @@ cloud.mondomaine.fr {
     }
     header_up X-Forwarded-Proto https
     header_up Host {host}
+    header Strict-Transport-Security max-age=15552000; includeSubDomains; preload
   }
 
   encode gzip
