@@ -1,3 +1,16 @@
 cloud.mondomaine.fr {
-  reverse_proxy nextcloud:80
+  reverse_proxy nextcloud:80 {
+    transport http {
+      read_buffer 0
+    }
+    header_up X-Forwarded-Proto https
+    header_up Host {host}
+  }
+
+  encode gzip
+  header {
+    X-Content-Type-Options "nosniff"
+    X-Frame-Options "SAMEORIGIN"
+    Referrer-Policy "no-referrer"
+  }
 }

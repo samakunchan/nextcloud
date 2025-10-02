@@ -25,14 +25,17 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      OVERWRITEPROTOCOL: https
+      OVERWRITEHOST: nextcloudsama.devpapangue.com
+      TRUSTED_PROXIES: caddy
 
   caddy:
     image: caddy:2
     container_name: caddy
     restart: always
     ports:
-      - "80:80"
-      - "443:443"
+      - "81:80"
+      - "444:443"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
@@ -43,3 +46,10 @@ volumes:
   nextcloud_db:
   caddy_data:
   caddy_config:
+
+# Nextcloud VPS
+# samakunchan
+# TBPlXei4OLAeFUgklsY6BirqoaLaSWQd4T5o0cHlcS8MoNzZCsQkjVR24ZtCDBIs6FvhLr9C4kam04rLmK4ZRb21bmnFe5KqteGQV0xQDddw6gqGVVgl8ET8Bz14rZvV
+# https://nextcloudsama.devpapangue.com
+# http://51.77.140.50:8091
+# root: nextcloud-sama-974-apple
