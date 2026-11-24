@@ -11,7 +11,12 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-
+      
+  nextcloud-redis:
+    image: redis:alpine
+    container_name: nextcloud-redis
+    restart: always
+    
   nextcloud:
     image: nextcloud:28
     container_name: ${CONTAINER_NAME}
@@ -25,14 +30,26 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      OVERWRITEPROTOCOL: http
+#      OVERWRITEHOST: ${OVERWRITEHOST}
+      TRUSTED_PROXIES: 172.24.0.0/16
+      NEXTCLOUD_CONFIG_MAINTENANCE_START_HOUR: 2
+      DEFAULT_PHONE_REGION: FR
+      REDIS_HOST: nextcloud-redis
+      REDIS_HOST_PORT: 6379
+      REDIS_TIMEOUT: 1.5
+      REDIS_PORT: 6379
+      MEMCACHE_LOCAL: \OC\Memcache\APCu
+      MEMCACHE_DISTRIBUTED: \OC\Memcache\Redis
+      MEMORY_LIMIT: 512M
 
   caddy:
     image: caddy:2
     container_name: caddy
     restart: always
     ports:
-      - "80:80"
-      - "443:443"
+      - "81:80"
+      - "444:443"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
